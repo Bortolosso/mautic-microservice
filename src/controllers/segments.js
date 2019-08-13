@@ -56,7 +56,7 @@ function editSegments(req, res){
     if(erro.length > 0){
         console.log("Error !");
     }else{
-        Segments.find().then((Segments) =>{
+        Segments.findOne({_id: req.body.id}).then((Segments) =>{
             Segments.segment_id = req.body.segment_id;
             Segments.mautic_segment_id = req.body.mautic_segment_id;
             Segments.platform_equity_id = req.body.platform_equity_id;
@@ -72,7 +72,7 @@ function editSegments(req, res){
 };
 
 function deleteSegments(req, res){
-    Segments.remove().then(() => {
+    Segments.remove({_id:req.body.id}).then(() => {
         console.log("Segment delete whith success !");
     }).catch((erro) => {
         console.log("There was an error in delete Segment, try again !")

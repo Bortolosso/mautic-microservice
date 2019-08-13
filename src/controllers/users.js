@@ -47,7 +47,7 @@ function editUser(req, res) {
     if(erro.length > 0){
         console.log("Error !");
     }else{
-        Users.find().then((Users) =>{
+        Users.findOne({_id: req.body.id}).then((Users) =>{
             Users.platform_user_id = req.body.platform_user_id;
             Users.mautic_user_id = req.body.mautic_user_id;
             Users.user_email = req.body.user_email;
@@ -62,7 +62,7 @@ function editUser(req, res) {
 };
 
 function deleteUser(req, res){
-    Users.remove().then(() => {
+    Users.remove({_id:req.body.id}).then(() => {
         console.log("User delete whith success !");
     }).catch((erro) => {
         console.log("There was an error in delete user, try again !")

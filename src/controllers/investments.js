@@ -47,7 +47,7 @@ function editInvestments(req, res){
     if(erro.length > 0){
         console.log("Error !");
     }else{
-        Investments.find().then((Investments) =>{
+        Investments.findOne({_id: req.body.id}).then((Investments) =>{
             Investments.platform_user_id = req.body.platform_user_id;
             Investments.segment_id = req.body.segment_id;
             Investments.user_segment_added = req.body.user_segment_added;
@@ -62,7 +62,7 @@ function editInvestments(req, res){
 };
 
 function deleteInvestments(req, res){
-    Investments.remove().then(() => {
+    Investments.remove({_id:req.body.id}).then(() => {
         console.log("Investment delete whith success !");
     }).catch((erro) => {
         console.log("There was an error in delete Investment, try again !")
