@@ -39,7 +39,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // app.use("/segment", urlencodedParse, Segments);
 // app.use("/investments", urlencodedParse, Investments);
 
-const PORT = 8080;
+const PORT = 8083;
 app.listen(PORT, () => {
     console.log("Server running in http://localhost:8080");
 });
