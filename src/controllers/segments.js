@@ -79,8 +79,28 @@ function deleteSegments(req, res){
     });
 };
 
+function showId(req, res){
+    Segments.findOne({_id: req.body.id}).then((Segments) =>{
+        Segments.segment_id = req.body.segment_id;
+        Segments.mautic_segment_id = req.body.mautic_segment_id;
+        Segments.platform_equity_id = req.body.platform_equity_id;
+        Segments.platform_step_id = req.body.platform_step_id;
+    });
+};
+
+function showAll(req, res){
+    Segments.find({}).then((Segments) =>{
+        Segments.segment_id = req.body.segment_id;
+        Segments.mautic_segment_id = req.body.mautic_segment_id;
+        Segments.platform_equity_id = req.body.platform_equity_id;
+        Segments.platform_step_id = req.body.platform_step_id;
+    });
+};
+
 module.exports = {
     createSegments,
     editSegments,
-    deleteSegments
+    deleteSegments,
+    showId,
+    showAll
 };

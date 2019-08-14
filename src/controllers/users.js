@@ -67,10 +67,28 @@ function deleteUser(req, res){
     }).catch((erro) => {
         console.log("There was an error in delete user, try again !")
     });
-}
+};
+
+function showId(req, res){
+    Users.findOne({_id: req.body.id}).then((Users) =>{
+        Users.platform_user_id = req.body.platform_user_id;
+        Users.mautic_user_id = req.body.mautic_user_id;
+        Users.user_email = req.body.user_email;
+    });
+};
+
+function showAll(req, res){
+    Users.find({}).then((Users) =>{
+        Users.platform_user_id = req.body.platform_user_id;
+        Users.mautic_user_id = req.body.mautic_user_id;
+        Users.user_email = req.body.user_email;
+    });
+};
 
 module.exports = {
     createUser,
     editUser,
-    deleteUser
-}
+    deleteUser,
+    showId,
+    showAll
+};
