@@ -11,6 +11,6 @@ router.get("/", (req, res) => {
 
 router.get("/create/investments", controller.createInvestments);
 
-router.post("/edit/investments", controller.editInvestments);
+router.put("/edit/investments", controller.editInvestments);
 
-router.post("/delete/investments", controller.deleteInvestments);
+router.delete("/delete/investments", controller.deleteInvestments);
