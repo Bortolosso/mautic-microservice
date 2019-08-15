@@ -1,20 +1,23 @@
+const name = require("../constants/investments");
+let CONST = name;
+
 function createInvestments(req, res){
     var erro = [];
 
     if(!req.body.platform_user_id || typeof req.body.platform_user_id == undefined || req.body.platform_user_id == null){
-        console.log("Invalid platform_user_id !");
+        console.log(CONST.CREATE.INVALID_MSG.PLATAFORM_USER_ID);
     };
     
     if(!req.body.segment_id || typeof req.body.segment_id == undefined || req.body.segment_id == null){
-        console.log("Invalid segment_id !");
+        console.log(CONST.CREATE.INVALID_MSG.SEGMENT_ADDED);
     };
 
     if(!req.body.user_segment_added || typeof req.body.user_segment_added == undefined || req.body.user_segment_added == null){
-        console.log("Invalid user_segment_added !");
+        console.log(CONST.CREATE.INVALID_MSG.SEGMENT_ID);
     };
 
     if(erro.length > 0){
-        console.log("Error !");
+        console.log(CONST.CREATE.MSG.ERROR.ERROR_GERAL);
     }else{
         const newInvestment = {
             platform_user_id: req.body.platform_user_id,
@@ -22,9 +25,9 @@ function createInvestments(req, res){
             user_segment_added: req.body.user_segment_added
         }
         new Investments(newInvestment).save().then(() => {
-            console.log("Create Investment whith success !");
+            console.log();
         }).catch((erro) => {
-            console.log("There was an error in create Investment, try again !");
+            console.log(CONST.MSG.ERROR.CREATE);
         });
     };
 };
@@ -33,19 +36,19 @@ function editInvestments(req, res){
     var erro = [];
 
     if(!req.body.platform_user_id || typeof req.body.platform_user_id == undefined || req.body.platform_user_id == null){
-        console.log("Invalid platform_user_id !");
+        console.log(CONST.EDIT.INVALID_MSG.PLATAFORM_USER_ID);
     };
     
     if(!req.body.segment_id || typeof req.body.segment_id == undefined || req.body.segment_id == null){
-        console.log("Invalid segment_id !");
+        console.log(CONST.EDIT.INVALID_MSG.SEGMENT_ID);
     };
 
     if(!req.body.user_segment_added || typeof req.body.user_segment_added == undefined || req.body.user_segment_added == null){
-        console.log("Invalid user_segment_added !");
+        console.log(CONST.EDIT.INVALID_MSG.SEGMENT_ADDED);
     };
 
     if(erro.length > 0){
-        console.log("Error !");
+        console.log(CONST.EDIT.MSG.ERROR.GERAL);
     }else{
         Investments.findOne({_id: req.body.id}).then((Investments) =>{
             Investments.platform_user_id = req.body.platform_user_id;
@@ -53,9 +56,9 @@ function editInvestments(req, res){
             Investments.user_segment_added = req.body.user_segment_added;
 
             Investments.save().then(() =>{
-                console.log("Investment edit whith success !");
+                console.log(CONST.EDIT.MSG.SUCESS.MSG);
             }).catch((error) => {
-                console.log("There was an error in edit Investment, try again !", erro);
+                console.log(CONST.EDIT.MSG.ERROR.EDIT, erro);
             });
         });
     };
@@ -63,9 +66,9 @@ function editInvestments(req, res){
 
 function deleteInvestments(req, res){
     Investments.remove({_id:req.body.id}).then(() => {
-        console.log("Investment delete whith success !");
+        console.log(CONST.DELETE.MSG.SUCESS.MSG);
     }).catch((erro) => {
-        console.log("There was an error in delete Investment, try again !")
+        console.log(CONST.DELETE.MSG.ERROR.EDIT);
     });
 };
 
