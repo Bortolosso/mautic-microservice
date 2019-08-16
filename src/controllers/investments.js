@@ -5,11 +5,11 @@ function createInvestments(req, res){
     var erro = [];
 
     if(!req.body.platform_user_id || typeof req.body.platform_user_id == undefined || req.body.platform_user_id == null){
-        console.log(CONST.CREATE.INVALID_MSG.PLATAFORM_USER_ID);
+        console.log(CONST.CREATE.INVALID_MSG.PLATFORM_USER_ID);
     };
     
     if(!req.body.segment_id || typeof req.body.segment_id == undefined || req.body.segment_id == null){
-        console.log(CONST.CREATE.INVALID_MSG.SEGMENT_ADDED);
+        console.log(CONST.CREATE.INVALID_MSG.USER.SEGMENT_ADDED);
     };
 
     if(!req.body.user_segment_added || typeof req.body.user_segment_added == undefined || req.body.user_segment_added == null){
@@ -17,7 +17,7 @@ function createInvestments(req, res){
     };
 
     if(erro.length > 0){
-        console.log(CONST.CREATE.MSG.ERROR.ERROR_GERAL);
+        console.log(CONST.CREATE.MSG.ERROR.GERAL);
     }else{
         const newInvestment = {
             platform_user_id: req.body.platform_user_id,
@@ -36,7 +36,7 @@ function editInvestments(req, res){
     var erro = [];
 
     if(!req.body.platform_user_id || typeof req.body.platform_user_id == undefined || req.body.platform_user_id == null){
-        console.log(CONST.EDIT.INVALID_MSG.PLATAFORM_USER_ID);
+        console.log(CONST.EDIT.INVALID_MSG.PLATFORM_USER_ID);
     };
     
     if(!req.body.segment_id || typeof req.body.segment_id == undefined || req.body.segment_id == null){
@@ -44,7 +44,7 @@ function editInvestments(req, res){
     };
 
     if(!req.body.user_segment_added || typeof req.body.user_segment_added == undefined || req.body.user_segment_added == null){
-        console.log(CONST.EDIT.INVALID_MSG.SEGMENT_ADDED);
+        console.log(CONST.EDIT.INVALID_MSG.USER_SEGMENT_ADDED);
     };
 
     if(erro.length > 0){
@@ -68,7 +68,7 @@ function deleteInvestments(req, res){
     Investments.remove({_id:req.body.id}).then(() => {
         console.log(CONST.DELETE.MSG.SUCESS.MSG);
     }).catch((erro) => {
-        console.log(CONST.DELETE.MSG.ERROR.EDIT);
+        console.log(CONST.DELETE.MSG.ERROR.DELETE);
     });
 };
 

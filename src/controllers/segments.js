@@ -1,24 +1,27 @@
+const name = require("../constants/segments");
+let CONST = name;
+
 function createSegments(req, res){
     var erro = [];
 
     if(!req.body.segment_id || typeof req.body.segment_id == undefined || req.body.segment_id == null){
-        console.log("Invalid segment_id !");
+        console.log(CONST.CREATE.INVALID_MSG.SEGMENT_ID);
     };
     
     if(!req.body.mautic_segment_id || typeof req.body.mautic_segment_id == undefined || req.body.mautic_segment_id == null){
-        console.log("Invalid mautic_segment_id !");
+        console.log(CONST.CREATE.INVALID_MSG.MAUTIC_SEGMENT_ID);
     };
 
     if(!req.body.platform_equity_id || typeof req.body.platform_equity_id == undefined || req.body.platform_equity_id == null){
-        console.log("Invalid platform_equity_id !");
+        console.log(CONST.CREATE.INVALID_MSG.PLATFORM_EQUITY_ID);
     };
 
     if(!req.body.platform_step_id || typeof req.body.platform_step_id == undefined || req.body.platform_step_id == null){
-        console.log("Invalid platform_equity_id !");
+        console.log(CONST.CREATE.INVALID_MSG.PLATFORM_STEP_ID);
     };
 
     if(erro.length > 0){
-        console.log("Error !");
+        console.log(CONST.CREATE.MSG.ERROR.GERAL);
     }else{
         const newSegment = {
             segment_id: req.body.segment_id,
@@ -27,9 +30,9 @@ function createSegments(req, res){
             platform_step_id: req.body.platform_step_id
         }
         new Segments(newUser).save().then(() => {
-            console.log("Create Segment whith success !");
+            console.log(CONST.CREATE.MSG.SUCESS.MSG);
         }).catch((erro) => {
-            console.log("There was an error in create Segment, try again !");
+            console.log(CONST.CREATE.MSG.SUCESS.MSG);
         });
     }
 };
@@ -38,23 +41,23 @@ function editSegments(req, res){
     var erro = [];
 
     if(!req.body.segment_id || typeof req.body.segment_id == undefined || req.body.segment_id == null){
-        console.log("Invalid platform_user_id !");
+        console.log(CONST.EDIT.INVALID_MSG.SEGMENT_ID);
     };
     
     if(!req.body.mautic_segment_id || typeof req.body.mautic_segment_id == undefined || req.body.mautic_segment_id == null){
-        console.log("Invalid mautic_user_id !");
+        console.log(CONST.EDIT.INVALID_MSG.MAUTIC_SEGMENT_ID);
     };
 
     if(!req.body.platform_equity_id || typeof req.body.platform_equity_id == undefined || req.body.platform_equity_id == null){
-        console.log("Invalid user_email !");
+        console.log(CONST.EDIT.INVALID_MSG.PLATFORM_EQUITY_ID);
     };
 
     if(!req.body.platform_step_id || typeof req.body.platform_step_id == undefined || req.body.platform_step_id == null){
-        console.log("Invalid platform_step_id !");
+        console.log(CONST.EDIT.INVALID_MSG.PLATFORM_STEP_ID);
     };
 
     if(erro.length > 0){
-        console.log("Error !");
+        console.log(CONST.EDIT.MSG.ERROR.GERAL);
     }else{
         Segments.findOne({_id: req.body.id}).then((Segments) =>{
             Segments.segment_id = req.body.segment_id;
@@ -63,9 +66,9 @@ function editSegments(req, res){
             Segments.platform_step_id = req.body.platform_step_id;
 
             Segments.save().then(() =>{
-                console.log("Segment edit whith success !");
+                console.log(CONST.EDIT.MSG.SUCESS.MSG);
             }).catch((error) => {
-                console.log("There was an error in edit Segment, try again !", erro);
+                console.log(CONST.EDIT.MSG.ERROR.EDIT, erro);
             });
         });
     };
@@ -73,9 +76,9 @@ function editSegments(req, res){
 
 function deleteSegments(req, res){
     Segments.remove({_id:req.body.id}).then(() => {
-        console.log("Segment delete whith success !");
+        console.log(CONST.DELETE.MSG.ERROR.DELETE);
     }).catch((erro) => {
-        console.log("There was an error in delete Segment, try again !")
+        console.log(CONST.DELETE.MSG.ERROR.DELETE)
     });
 };
 

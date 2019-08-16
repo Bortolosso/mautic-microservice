@@ -1,14 +1,14 @@
 module.exports = {
     CREATE:{
         INVALID_MSG:{
-            PLATAFORM_USER_ID: "Invalid platform_user_id !",
+            PLATFORM_USER_ID: "Invalid platform_user_id !",
             SEGMENT_ID: "Invalid segment_id !",
-            SEGMENT_ADDED: "Invalid user_segment_added !"
+            USER_SEGMENT_ADDED: "Invalid user_segment_added !"
         },
         MSG:{
             ERROR:{
-                ERROR_GERAL: "Error !",
-                ERROR_CREATE: "There was an error in create Investment, try again !", 
+                GERAL: "Error !",
+                CREATE: "There was an error in create Investment, try again !", 
             },
             SUCESS:{
 
@@ -18,7 +18,7 @@ module.exports = {
 
     EDIT:{
         INVALID_MSG:{
-            PLATAFORM_USER_ID: "Invalid platform_user_id !",
+            PLATFORM_USER_ID: "Invalid platform_user_id !",
             SEGMENT_ID: "Invalid segment_id !",
             SEGMENT_ADDED: "Invalid user_segment_added !"
         },
@@ -28,7 +28,7 @@ module.exports = {
                 EDIT: "There was an error in edit Investment, try again !", 
             },
             SUCESS:{
-                MSG: "Investment edit whith success !"
+                MSG: "Investment edited whith success !"
             }
         }
     },
@@ -39,7 +39,7 @@ module.exports = {
         },
         MSG:{
             ERROR:{
-            
+                DELETE: "There was an error in delete Segment, try again !"
             },
             SUCESS:{
                 MSG: "Investment deleted whith success !"
