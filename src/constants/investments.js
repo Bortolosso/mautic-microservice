@@ -39,7 +39,7 @@ module.exports = {
         },
         MSG:{
             ERROR:{
-                DELETE: "There was an error in delete Segment, try again !"
+                DELETE: "There was an error in delete Investment, try again !"
             },
             SUCESS:{
                 MSG: "Investment deleted whith success !"

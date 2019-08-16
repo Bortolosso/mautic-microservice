@@ -11,6 +11,6 @@ router.get("/", (req, res) => {
 
 router.get("/create/segment", controller.createSegments);
 
-router.post("/edit/segments", controller.editSegments);
+router.put("/edit/segments", controller.editSegments);
 
-router.post("/delete/segments", controller.deleteSegments);
+router.delete("/delete/segments", controller.deleteSegments);

@@ -11,6 +11,6 @@ router.get("/", (req, res) => {
 
 router.get("/create/user", controller.createUser);
 
-router.post("/edit/user", controller.editUser);
+router.put("/edit/user", controller.editUser);
 
-router.post("/user/delete", controller.deleteUser);
+router.delete("/user/delete", controller.deleteUser);
