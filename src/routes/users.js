@@ -9,8 +9,8 @@ router.get("/", (req, res) => {
     res.send("Principal/Neutro Page !");
 });
 
-router.get("/create/user", controller.createUser);
+router.get("/create/users", controller.createUser);
 
-router.put("/edit/user", controller.editUser);
+router.put("/edit/users", controller.editUser);
 
-router.delete("/user/delete", controller.deleteUser);
+router.delete("/delete/users", controller.deleteUser);

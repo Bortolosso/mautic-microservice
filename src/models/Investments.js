@@ -18,6 +18,8 @@ const Investments = new Schema({
 
 mongoose.model("Investments", Investments);
 
+//Comment
+
 const Investment = mongoose.model("Users");
 
 new Investment({

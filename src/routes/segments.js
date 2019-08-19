@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
     res.send("Principal/Neutro Page !");
 });
 
-router.get("/create/segment", controller.createSegments);
+router.get("/create/segments", controller.createSegments);
 
 router.put("/edit/segments", controller.editSegments);
 
