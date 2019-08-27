@@ -6,11 +6,23 @@ const Investments = mongoose.model("Investments");
 const controller = require("../controllers/investments")
 
 router.get("/", (req, res) => {
-    res.send("Principal/Neutro Page !");
+    Investments.find().then((Investments) => {
+        res.send("", {Investments: Investments})
+    }).catch((error) => {
+        console.log(error);
+    });
 });
 
-router.get("/create/investments", controller.createInvestments);
+router.post("/", controller.createInvestments);
 
-router.put("/edit/investments", controller.editInvestments);
+router.get("/:investmentId", (req, res) => {
+    Investments.findOne({_id: req.body.id}).then((Investments) =>{
+        res.send("", {Investments: Investments});
+    }).catch((error) =>{
+        console.log(error);
+    });
+});
 
-router.delete("/delete/investments", controller.deleteInvestments);
+router.put("/:investmentId", controller.editInvestments);
+
+router.delete("/:investmentId", controller.deleteInvestments);

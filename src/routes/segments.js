@@ -6,11 +6,23 @@ const Segments = mongoose.model("Segments");
 const controller = require("../controllers/segments");
 
 router.get("/", (req, res) => {
-    res.send("Principal/Neutro Page !");
+    Segments.find().then((Segments) => {
+        res.send("", {Segments: Segments});
+    }).catch((error) => {
+        console.log(error);
+    });
 });
 
-router.get("/create/segments", controller.createSegments);
+router.post("/", controller.createSegments);
 
-router.put("/edit/segments", controller.editSegments);
+router.get("/:segmentsId", (req, res) => {
+    Segments.findOne({_id: req.body.id}).then((Segments) => {
+        res.send("", {Segments: Segments});
+    }).catch((error) => {
+        console.log(error);
+    })
+});
 
-router.delete("/delete/segments", controller.deleteSegments);
+router.put("/:segmentsId", controller.editSegments);
+
+router.delete("/:segmentsId", controller.deleteSegments);

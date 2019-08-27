@@ -4,9 +4,7 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const path = require("path")
 const app = express();
-const Users = require("./src/routes/users");
-const Investments = require("./src/routes/investments");
-const Segments = require("./src/routes/segments");
+
 
 app.use(session({
     secret: "senha123",
@@ -15,7 +13,7 @@ app.use(session({
 }));
 
 app.use((req, res, next) => {
-    console.log("success_msg");// "locals" serve para criar variaveis globais
+    console.log("success_msg");
     console.log("error_msg");
     next();
 });
@@ -39,7 +37,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // app.use("/segment", urlencodedParse, Segments);
 // app.use("/investments", urlencodedParse, Investments);
 
-const PORT = 8083;
+const PORT = 8082;
 app.listen(PORT, () => {
-    console.log("Server running in http://localhost:8080");
+    console.log("Server running in http://localhost:8082");
 });

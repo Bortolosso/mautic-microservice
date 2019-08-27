@@ -6,11 +6,23 @@ const controller = require("../controllers/users")
 const Users = mongoose.model("Users");
 
 router.get("/", (req, res) => {
-    res.send("Principal/Neutro Page !");
+    Users.find().then((Users) => {
+        res.send("", {Users: Users});
+    }).catch((error) => {
+        console.log(error)
+    });
 });
 
-router.get("/create/users", controller.createUser);
+router.post("/", controller.createUser);
 
-router.put("/edit/users", controller.editUser);
+router.get("/:userId", (req, res) => {
+    Users.findOne({_id: req.body.id}).then((Users) => {
+        res.send("", {Users:Users});
+    }).catch((error) => {
+        console.log(error);
+    });
+});
 
-router.delete("/delete/users", controller.deleteUser);
+router.put("/:usersId", controller.editUser);
+
+router.delete("/:usersId", controller.deleteUser);
