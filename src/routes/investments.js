@@ -5,23 +5,11 @@ require("../models/Investments");
 const Investments = mongoose.model("Investments");
 const controller = require("../controllers/investments")
 
-router.get("/", (req, res) => {
-    Investments.find().then((Investments) => {
-        res.send("", {Investments: Investments})
-    }).catch((error) => {
-        console.log(error);
-    });
-});
+router.get("/", controller.showAll);
 
 router.post("/", controller.createInvestments);
 
-router.get("/:investmentId", (req, res) => {
-    Investments.findOne({_id: req.body.id}).then((Investments) =>{
-        res.send("", {Investments: Investments});
-    }).catch((error) =>{
-        console.log(error);
-    });
-});
+router.get("/:investmentId", controller.showId);
 
 router.put("/:investmentId", controller.editInvestments);
 

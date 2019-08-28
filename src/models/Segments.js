@@ -2,10 +2,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const Segments = new Schema({
-    segment_id:{
-        type:String,
-        required:false
-    },
     mautic_segment_id:{
         type:String,
         required:false

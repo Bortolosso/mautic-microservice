@@ -5,23 +5,11 @@ require("../models/Segments");
 const Segments = mongoose.model("Segments");
 const controller = require("../controllers/segments");
 
-router.get("/", (req, res) => {
-    Segments.find().then((Segments) => {
-        res.send("", {Segments: Segments});
-    }).catch((error) => {
-        console.log(error);
-    });
-});
+router.get("/", controller.showAll);
 
 router.post("/", controller.createSegments);
 
-router.get("/:segmentsId", (req, res) => {
-    Segments.findOne({_id: req.body.id}).then((Segments) => {
-        res.send("", {Segments: Segments});
-    }).catch((error) => {
-        console.log(error);
-    })
-});
+router.get("/:segmentsId", controller.showId);
 
 router.put("/:segmentsId", controller.editSegments);
 

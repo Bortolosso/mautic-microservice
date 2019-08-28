@@ -50,7 +50,8 @@ function editUser(req, res) {
     if(erro.length > 0){
         console.log(CONST.EDIT.INVALID_MSG.USER_EMAIL);
     }else{
-        Users.findOne({_id: req.body.id}).then((Users) =>{
+        var userData = req.body.query || { "_id": req.body.id }
+        Users.findOne(userData).then((Users) =>{
             Users.platform_user_id = req.body.platform_user_id;
             Users.mautic_user_id = req.body.mautic_user_id;
             Users.user_email = req.body.user_email;

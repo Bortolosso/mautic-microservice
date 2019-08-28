@@ -1,4 +1,5 @@
 const name = require("../constants/investments");
+const users = require("../constants/users");
 let CONST = name;
 
 function createInvestments(req, res){
@@ -28,6 +29,9 @@ function createInvestments(req, res){
             console.log();
         }).catch((erro) => {
             console.log(CONST.MSG.ERROR.CREATE);
+        });
+        mautic_user_idFind((req, res) => {
+
         });
     };
 };
@@ -87,6 +91,13 @@ function showAll(req, res){
         Investments.user_segment_added = req.body.user_segment_added;
     });
 };
+
+function mautic_user_idFind(req, res){
+    req.body.query = {
+        user_id: req.body.user_id
+    }
+    users.editUser(req, res);
+}
 
 module.exports = {
     createInvestments,
