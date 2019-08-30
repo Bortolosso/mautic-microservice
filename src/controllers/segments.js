@@ -30,13 +30,13 @@ function createSegments(req, res){
             platform_equity_id: req.body.platform_equity_id,
             platform_step_id: req.body.platform_step_id
         }
-        new Segments(newUser).save().then(() => {
+        new Segments(newSegment).save().then(() => {
             console.log(CONST.CREATE.MSG.SUCESS.MSG);
         }).catch((erro) => {
             console.log(CONST.CREATE.MSG.SUCESS.MSG);
         });
 
-        segmentUserIdFind(req, res , (error, result) => {
+        segmentIdFind(req, res , (error, result) => {
             if (error){
                 console.log("xpto");
             };
@@ -66,27 +66,20 @@ function editSegments(req, res){
     if(erro.length > 0){
         console.log(CONST.EDIT.MSG.ERROR.GERAL);
     }else{
-        var segmentData = req.body.query || {"_id": req.body.segment_id};
-        Segments.findOne(segmentData).then((Segments) =>{
+        Segments.findOne(segmentData).then((Segments) => {
             Segments.segment_id = req.body.segment_id;
             Segments.mautic_segment_id = req.body.mautic_segment_id;
             Segments.platform_equity_id = req.body.platform_equity_id;
             Segments.platform_step_id = req.body.platform_step_id;
 
-            var segmentData = {
-                segment_id: Segments.segment_id
-            };
-
-            return callback(null, segmentData).then((req, res) => {
-                Segments.save().then(() =>{
+            Segments.save().then(() =>{
                     console.log(CONST.EDIT.MSG.SUCESS.MSG);
                 }).catch((error) => {
                     console.log(CONST.EDIT.MSG.ERROR.EDIT, erro);
                 });
             });
-        });
+        };
     };
-};
 
 function deleteSegments(req, res){
     Segments.remove({_id:req.body.id}).then(() => {
@@ -114,7 +107,7 @@ function showAll(req, res){
     });
 };
 
-function segmentUserIdFind(req, res, callback){
+function segmentIdFind(req, res, callback){
     req.body.query = {
         segment_id: req.body.segment_id
     };
