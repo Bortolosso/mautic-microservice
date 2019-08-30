@@ -30,8 +30,11 @@ function createInvestments(req, res){
         }).catch((erro) => {
             console.log(CONST.MSG.ERROR.CREATE);
         });
-        mautic_user_idFind((req, res) => {
 
+        mauticUserIdFind(req, res, (error, result) =>{
+            if (error) console.log('xpto')
+    
+            
         });
     };
 };
@@ -54,7 +57,7 @@ function editInvestments(req, res){
     if(erro.length > 0){
         console.log(CONST.EDIT.MSG.ERROR.GERAL);
     }else{
-        Investments.findOne({_id: req.body.id}).then((Investments) =>{
+        Investments.findOne({_id: req.body.id}).then((Investments) => {
             Investments.platform_user_id = req.body.platform_user_id;
             Investments.segment_id = req.body.segment_id;
             Investments.user_segment_added = req.body.user_segment_added;
@@ -92,12 +95,35 @@ function showAll(req, res){
     });
 };
 
-function mautic_user_idFind(req, res){
+function mauticUserIdFind(req, res, callback){
     req.body.query = {
         user_id: req.body.user_id
-    }
-    users.editUser(req, res);
-}
+    };
+
+    users.editUser(req, res, (error, result) =>{
+
+        if (error == null){
+            requestUrlUser(req, res);
+        };
+        
+        if (error) {
+            console.log('xpto');
+        };
+    });
+};
+
+function requestUrlUser(req, res){
+    const Http = new XMLHttpRequest();
+    const url = "https://carloscarvalho:Hurst2019..@mautic.hurst.capital/api/contacts/new"; //Constants
+    Http.open("GET", url);
+    Http.send();
+
+    Http.onreadystatechange = () => {
+        if(this.readyState == 4 && this.status == 200){
+            console.log(Http.responseText);
+        };
+    };
+};
 
 module.exports = {
     createInvestments,

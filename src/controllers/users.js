@@ -32,7 +32,7 @@ function createUser(req, res) {
     };
 };
 
-function editUser(req, res) {
+function editUser(req, res, callback) {
     var erro = [];
 
     if(!req.body.platform_user_id || typeof req.body.platform_user_id == undefined || req.body.platform_user_id == null){
@@ -50,17 +50,23 @@ function editUser(req, res) {
     if(erro.length > 0){
         console.log(CONST.EDIT.INVALID_MSG.USER_EMAIL);
     }else{
-        var userData = req.body.query || { "_id": req.body.id }
-        Users.findOne(userData).then((Users) =>{
+        var userData = req.body.query || {"_id": req.body.id};
+        Users.findOne(userData).then((Users) => {
             Users.platform_user_id = req.body.platform_user_id;
             Users.mautic_user_id = req.body.mautic_user_id;
             Users.user_email = req.body.user_email;
 
-            Users.save().then(() =>{
-                console.log(CONST.EDIT.MSG.SUCESS.MSG);
-            }).catch((error) => {
-                console.log(CONST.EDIT.MSG.ERROR.EDIT, erro);
-            });
+            var userData = {
+                mautic_user_id: Users.mautic_user_id
+            };
+            
+            return callback(null, userData).then((req ,res) => {
+                Users.save().then(() =>{
+                    console.log(CONST.EDIT.MSG.SUCESS);
+                }).catch((error) => {
+                    console.log(CONST.EDIT.MSG.ERROR.EDIT);
+                })
+            }); 
         });
     };   
 };
@@ -69,7 +75,7 @@ function deleteUser(req, res){
     Users.remove({_id:req.body.id}).then(() => {
         console.log(CONST.DELETE.MSG.SUCESS.MSG);
     }).catch((erro) => {
-        console.log(CONST.DELETE.MSG.ERROR.DELETE)
+        console.log(CONST.DELETE.MSG.ERROR.DELETE);
     });
 };
 

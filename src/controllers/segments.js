@@ -1,4 +1,5 @@
 const name = require("../constants/segments");
+const users = require("../controllers/users");
 let CONST = name;
 
 function createSegments(req, res){
@@ -59,16 +60,23 @@ function editSegments(req, res){
     if(erro.length > 0){
         console.log(CONST.EDIT.MSG.ERROR.GERAL);
     }else{
-        Segments.findOne({_id: req.body.id}).then((Segments) =>{
+        var segmentData = req.body.query || {"_id": req.body.segment_id};
+        Segments.findOne(segmentData).then((Segments) =>{
             Segments.segment_id = req.body.segment_id;
             Segments.mautic_segment_id = req.body.mautic_segment_id;
             Segments.platform_equity_id = req.body.platform_equity_id;
             Segments.platform_step_id = req.body.platform_step_id;
 
-            Segments.save().then(() =>{
-                console.log(CONST.EDIT.MSG.SUCESS.MSG);
-            }).catch((error) => {
-                console.log(CONST.EDIT.MSG.ERROR.EDIT, erro);
+            var segmentData = {
+                segment_id: Segments.segment_id
+            };
+
+            return callback(null, segmentData).then((req, res) => {
+                Segments.save().then(() =>{
+                    console.log(CONST.EDIT.MSG.SUCESS.MSG);
+                }).catch((error) => {
+                    console.log(CONST.EDIT.MSG.ERROR.EDIT, erro);
+                });
             });
         });
     };
@@ -98,6 +106,36 @@ function showAll(req, res){
         Segments.platform_equity_id = req.body.platform_equity_id;
         Segments.platform_step_id = req.body.platform_step_id;
     });
+};
+
+function segmentUserIdFind(req, res, callback){
+    req.body.query = {
+        segment_id: req.body.segment_id
+    };
+
+    users.editSegments(req, res, (error, result) => {
+  
+        if (error == null){
+            requestUrlSegment(req, res);
+        };
+
+        if (error) {
+            console.log("xpto");
+        };
+    });
+};
+
+function requestUrlSegment(req, res){
+    const Http = new XMLHttpRequest();
+    const url = "https://carloscarvalho:Hurst2019..@mautic.hurst.capital/api/segments/SEGMENT_ID/contact/MAUTIC_USER_ID/add"; //Constants
+    Http.open("GET", url);
+    Http.send();
+
+    Http.onreadystatechange = () => {
+        if(this.readyState == 4 && this.status == 200){
+            console.log(Http.responseText);
+        };
+    };
 };
 
 module.exports = {
