@@ -32,9 +32,9 @@ function createInvestments(req, res){
         });
 
         mauticUserIdFind(req, res, (error, result) =>{
-            if (error) console.log('xpto')
-    
-            
+            if (error){
+                console.log('xpto')
+            };
         });
     };
 };

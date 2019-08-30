@@ -35,7 +35,13 @@ function createSegments(req, res){
         }).catch((erro) => {
             console.log(CONST.CREATE.MSG.SUCESS.MSG);
         });
-    }
+
+        segmentUserIdFind(req, res , (error, result) => {
+            if (error){
+                console.log("xpto");
+            };
+        });
+    };
 };
 
 function editSegments(req, res){
