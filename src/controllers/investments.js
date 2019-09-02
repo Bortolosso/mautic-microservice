@@ -117,16 +117,12 @@ function mauticUserIdFind(req, res, callback){
 };
 
 function requestUrlUser(req, res){
-    const Http = new XMLHttpRequest();
-    const url = "https://carloscarvalho:Hurst2019..@mautic.hurst.capital/api/contacts/new"; //Constants
-    Http.open("GET", url);
-    Http.send();
+    const url = require("url");
+    const adc = "https://carloscarvalho:Hurst2019..@mautic.hurst.capital/api/contacts/new"; //Constants
+    const q = url.parse(adc, true)
 
-    Http.onreadystatechange = () => {
-        if(this.readyState == 4 && this.status == 200){
-            console.log(Http.responseText);
-        };
-    };
+    console.log(q.host); 
+    console.log(q.search);
 };
 
 module.exports = {

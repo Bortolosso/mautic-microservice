@@ -1,5 +1,6 @@
 const name = require("../constants/segments");
 const users = require("../controllers/users");
+const Segments = require("../models/Segments");
 let CONST = name;
 
 function createSegments(req, res){
@@ -66,7 +67,7 @@ function editSegments(req, res){
     if(erro.length > 0){
         console.log(CONST.EDIT.MSG.ERROR.GERAL);
     }else{
-        Segments.findOne(segmentData).then((Segments) => {
+        Segments.findOne({_id: req.body.id}).then((Segments) => {
             Segments.segment_id = req.body.segment_id;
             Segments.mautic_segment_id = req.body.mautic_segment_id;
             Segments.platform_equity_id = req.body.platform_equity_id;
@@ -112,27 +113,16 @@ function segmentIdFind(req, res, callback){
         segment_id: req.body.segment_id
     };
 
-    users.editSegments(req, res, (error, result) => {
-
-        if (error) {
-            console.log("xpto");
-        }else{
-            requestUrlSegment(req, res);
-        };
-    });
+    requestUrlSegment(req, res);
 };
 
 function requestUrlSegment(req, res){
-    const Http = new XMLHttpRequest();
-    const url = "https://carloscarvalho:Hurst2019..@mautic.hurst.capital/api/segments/SEGMENT_ID/contact/MAUTIC_USER_ID/add"; //Constants
-    Http.open("GET", url);
-    Http.send();
+    const url = require("url");
+    const adc = "https://carloscarvalho:Hurst2019..@mautic.hurst.capital/api/segments/SEGMENT_ID/contact/MAUTIC_USER_ID/add"; //Constants
+    const q = url.parse(adc, true);
 
-    Http.onreadystatechange = () => {
-        if(this.readyState == 4 && this.status == 200){
-            console.log(Http.responseText);
-        };
-    };
+    console.log(q.host); 
+    console.log(q.search);
 };
 
 module.exports = {

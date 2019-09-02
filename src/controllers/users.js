@@ -1,4 +1,6 @@
 const name = require("../constants/users");
+const Users = require("../models/Users");
+const Investments = require("../models/Investments");
 let CONST = name;
 
 function createUser(req, res) {
@@ -50,25 +52,20 @@ function editUser(req, res, callback) {
     if(erro.length > 0){
         console.log(CONST.EDIT.INVALID_MSG.USER_EMAIL);
     }else{
-        var userData = req.body.query || {"_id": req.body.id};
-        Users.findOne(userData).then((Users) => {
+        Users.findOne({_id: req.body.id}).then((Users) => {
             Users.platform_user_id = req.body.platform_user_id;
             Users.mautic_user_id = req.body.mautic_user_id;
             Users.user_email = req.body.user_email;
 
-            var userData = {
-                mautic_user_id: Users.mautic_user_id
-            };
-            
-            return callback(null, userData).then((req ,res) => {
-                Users.save().then(() =>{
+            Users.save().then(() =>{
                     console.log(CONST.EDIT.MSG.SUCESS);
                 }).catch((error) => {
                     console.log(CONST.EDIT.MSG.ERROR.EDIT);
-                })
+                });
+            }).catch((error) => {
+                console.log(error);
             }); 
-        });
-    };   
+        };   
 };
 
 function deleteUser(req, res){

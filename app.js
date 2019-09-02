@@ -31,7 +31,7 @@ router.use("/investments", investmentsRoute);
 router.use("/segments", segmentsRoute);
 router.use("/users", usersRoute);
 
-const PORT = 8082;
+const PORT = 8089;
 app.listen(PORT, () => {
-    console.log("Server running in http://localhost:8082");
+    console.log("Server running in http://localhost:8089");
 });
