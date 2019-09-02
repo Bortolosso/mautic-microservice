@@ -15,4 +15,4 @@ router.put("/:investmentId", controller.editInvestments);
 
 router.delete("/:investmentId", controller.deleteInvestments);
 
-
+module.exports = router;

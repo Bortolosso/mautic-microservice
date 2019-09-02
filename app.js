@@ -5,18 +5,11 @@ const session = require("express-session");
 const path = require("path")
 const app = express();
 
+const router = express.Router();
 
-app.use(session({
-    secret: "senha123",
-    resave: true,
-    saveUninitialized: true
-}));
-
-app.use((req, res, next) => {
-    console.log("success_msg");
-    console.log("error_msg");
-    next();
-});
+const investmentsRoute = require("./src/routes/investments");
+const segmentsRoute = require("./src/routes/segments");
+const usersRoute = require("./src/routes/users");
 
 const urlencodedParse = bodyParser.urlencoded({extended:false}); 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -33,9 +26,10 @@ mongoose.connect("mongodb://localhost/microservice", {
 
 app.use(express.static(path.join(__dirname, "public")));
 
-// app.use("/user", urlencodedParse, Users);
-// app.use("/segment", urlencodedParse, Segments);
-// app.use("/investments", urlencodedParse, Investments);
+app.use(router);
+router.use("/investments", investmentsRoute);
+router.use("/segments", segmentsRoute);
+router.use("/users", usersRoute);
 
 const PORT = 8082;
 app.listen(PORT, () => {

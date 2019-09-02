@@ -1,5 +1,6 @@
 const name = require("../constants/investments");
-const users = require("../constants/users");
+const Investments = require("../models/Investments");
+const users = require("../controllers/users");
 let CONST = name;
 
 function createInvestments(req, res){
@@ -20,11 +21,14 @@ function createInvestments(req, res){
     if(erro.length > 0){
         console.log(CONST.CREATE.MSG.ERROR.GERAL);
     }else{
+
+        console.log('body:', req.body)
         const newInvestment = {
             platform_user_id: req.body.platform_user_id,
             segment_id: req.body.segment_id,
             user_segment_added: req.body.user_segment_added
         }
+        
         new Investments(newInvestment).save().then(() => {
             console.log();
         }).catch((erro) => {
@@ -88,7 +92,7 @@ function showId(req, res){
 };
 
 function showAll(req, res){
-    Investments.find({}).then((Investments) =>{
+    Investments.find().then((Investments) =>{
         Investments.platform_user_id = req.body.platform_user_id;
         Investments.segment_id = req.body.segment_id;
         Investments.user_segment_added = req.body.user_segment_added;
@@ -131,4 +135,4 @@ module.exports = {
     deleteInvestments,
     showId,
     showAll
-};
+}

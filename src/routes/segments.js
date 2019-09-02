@@ -14,3 +14,5 @@ router.get("/:segmentsId", controller.showId);
 router.put("/:segmentsId", controller.editSegments);
 
 router.delete("/:segmentsId", controller.deleteSegments);
+
+module.exports = router;

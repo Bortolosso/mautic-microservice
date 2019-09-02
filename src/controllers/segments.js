@@ -113,13 +113,11 @@ function segmentIdFind(req, res, callback){
     };
 
     users.editSegments(req, res, (error, result) => {
-  
-        if (error == null){
-            requestUrlSegment(req, res);
-        };
 
         if (error) {
             console.log("xpto");
+        }else{
+            requestUrlSegment(req, res);
         };
     });
 };

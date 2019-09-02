@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const Investments = new Schema({
+const InvestmentsSchema = new Schema({
     platform_user_id:{
         type:String,
         required: false
@@ -16,18 +16,6 @@ const Investments = new Schema({
     }
 });
 
-mongoose.model("Investments", Investments);
+const Investments = mongoose.model("Investments", InvestmentsSchema);
 
-//Comment
-
-const Investment = mongoose.model("Users");
-
-new Investment({
-    platform_user_id:"1234_abcd",
-    segment_id:"abcd_1234",
-    user_segment_added:"test_1234"
-}).save().then(() => {
-    console.log("Investment save !")
-}).catch((erro) => {
-    console.log("Investment erro save", erro)
-});
+module.exports = Investments;

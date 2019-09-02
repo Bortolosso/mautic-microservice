@@ -1,7 +1,7 @@
 const mongoose =  require("mongoose");
 const Schema = mongoose.Schema;
 
-const Users =  new Schema({
+const UsersSchema =  new Schema({
     platform_user_id:{
         type:String,
         required: false
@@ -16,18 +16,6 @@ const Users =  new Schema({
     }
 });
 
-mongoose.model("Users", Users);
+const Users = mongoose.model("Users", UsersSchema);
 
-//Comment
-
-const User = mongoose.model("Users");
-
-new User({
-    platform_user_id:"1234_abcd",
-    mautic_user_id:"abcd_1234",
-    user_email:"test@mail.com"
-}).save().then(() => {
-    console.log("User save !")
-}).catch((erro) => {
-    console.log("User erro save", erro)
-});
+module.exports = Users;
