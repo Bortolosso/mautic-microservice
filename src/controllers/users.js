@@ -21,12 +21,12 @@ function createUser(req, res) {
     if(erro.length > 0){
         console.log(CONST.CREATE.MSG.ERROR.GERAL);
     }else{
-        const newInvestment = {
+        const newUser = {
             platform_user_id: req.body.platform_user_id,
             mautic_user_id: req.body.mautic_user_id,
             user_email: req.body.user_email
-        }
-        new Investments(newInvestment).save().then(() => {
+        };
+        new Users(newUser).save().then(() => {
             console.log(CONST.CREATE.MSG.SUCESS.MSG);
         }).catch((erro) => {
             console.log(CONST.CREATE.MSG.ERROR.CREATE);

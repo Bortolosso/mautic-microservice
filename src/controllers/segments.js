@@ -30,7 +30,7 @@ function createSegments(req, res){
             mautic_segment_id: req.body.mautic_segment_id,
             platform_equity_id: req.body.platform_equity_id,
             platform_step_id: req.body.platform_step_id
-        }
+        };
         new Segments(newSegment).save().then(() => {
             console.log(CONST.CREATE.MSG.SUCESS.MSG);
         }).catch((erro) => {
@@ -83,10 +83,10 @@ function editSegments(req, res){
     };
 
 function deleteSegments(req, res){
-    Segments.remove({_id:req.body.id}).then(() => {
-        console.log(CONST.DELETE.MSG.ERROR.DELETE);
+    Segments.deleteOne({_id:req.body.id}).then(() => {
+         console.log(CONST.DELETE.MSG.ERROR.DELETE);
     }).catch((erro) => {
-        console.log(CONST.DELETE.MSG.ERROR.DELETE)
+        console.log(CONST.DELETE.MSG.ERROR.DELETE);        
     });
 };
 

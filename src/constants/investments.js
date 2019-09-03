@@ -1,5 +1,8 @@
 module.exports = {
     CREATE:{
+        SUCCESS:{
+            CREATE: "Investments create whitch success !"   
+        },
         INVALID_MSG:{
             PLATFORM_USER_ID: "Invalid platform_user_id !",
             SEGMENT_ID: "Invalid segment_id !",

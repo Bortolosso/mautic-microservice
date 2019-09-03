@@ -1,0 +1,28 @@
+Investments
+
+{
+	"segment_id": "123",
+	"mautic_segment_id": "123",
+	"platform_equity_id": "123",
+	"platform_step_id": "123"
+}
+
+//
+
+Users
+
+{
+	"platform_user_id": "1234",
+	"mautic_user_id": "1234",
+	"user_email":"1234"
+}
+
+//
+
+Segments
+
+{
+    "mautic_segment_id": "1234",
+    "platform_equity_id": "1234",
+    "platform_step_id": "1234"
+}

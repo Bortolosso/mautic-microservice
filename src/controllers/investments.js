@@ -21,16 +21,13 @@ function createInvestments(req, res){
     if(erro.length > 0){
         console.log(CONST.CREATE.MSG.ERROR.GERAL);
     }else{
-
-        console.log('body:', req.body)
         const newInvestment = {
             platform_user_id: req.body.platform_user_id,
             segment_id: req.body.segment_id,
             user_segment_added: req.body.user_segment_added
-        }
-        
+        }        
         new Investments(newInvestment).save().then(() => {
-            console.log();
+            console.log(CONST.CREATE.SUCCESS.CREATE);
         }).catch((erro) => {
             console.log(CONST.MSG.ERROR.CREATE);
         });

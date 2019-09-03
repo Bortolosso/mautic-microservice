@@ -7,9 +7,9 @@ const controller = require("../controllers/investments")
 
 router.get("/", controller.showAll);
 
-router.post("/", controller.createInvestments);
-
 router.get("/:investmentId", controller.showId);
+
+router.post("/", controller.createInvestments);
 
 router.put("/:investmentId", controller.editInvestments);
 
