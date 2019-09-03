@@ -1,6 +1,6 @@
 const name = require("../constants/users");
 const Users = require("../models/Users");
-const Investments = require("../models/Investments");
+const request = require("request");
 let CONST = name;
 
 function createUser(req, res) {
@@ -30,6 +30,15 @@ function createUser(req, res) {
             console.log(CONST.CREATE.MSG.SUCESS.MSG);
         }).catch((erro) => {
             console.log(CONST.CREATE.MSG.ERROR.CREATE);
+        });
+
+        request.post(CONST.REQUEST.URL, (error, res, body) => {
+            if (error) {
+                console.error(error);
+                return
+            };
+        console.log(`statusCode: ${res.statusCode}`);
+        // console.log(body)
         });
     };
 };

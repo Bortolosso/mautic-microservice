@@ -1,4 +1,7 @@
 module.exports = {
+    REQUEST:{
+        URL: "https://carloscarvalho:Hurst2019..@mautic.hurst.capital/api/contacts/new"
+    },
     CREATE:{
         INVALID_MSG:{
             PLATFORM_USER_ID: "Invalid platform_user_id !",

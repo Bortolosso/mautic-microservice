@@ -1,6 +1,7 @@
 const name = require("../constants/investments");
 const Investments = require("../models/Investments");
 const users = require("../controllers/users");
+const request = require("request");
 let CONST = name;
 
 function createInvestments(req, res){
@@ -31,11 +32,12 @@ function createInvestments(req, res){
         }).catch((erro) => {
             console.log(CONST.MSG.ERROR.CREATE);
         });
-
-        mauticUserIdFind(req, res, (error, result) =>{
-            if (error){
-                console.log('xpto')
+        request.post(CONST.REQUEST.URL, (error, res, body) => {
+            if(error) {
+                console.error(error);
+                return;
             };
+        console.log(`statusCode: ${res.statusCode}`);
         });
     };
 };

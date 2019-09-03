@@ -1,4 +1,7 @@
 module.exports = {
+    REQUEST:{
+        URL: "https://carloscarvalho:Hurst2019..@mautic.hurst.capital/api/segments/SEGMENT_ID/contact/MAUTIC_USER_ID/add"
+    },
     CREATE:{
         SUCCESS:{
             CREATE: "Investments create whitch success !"   
