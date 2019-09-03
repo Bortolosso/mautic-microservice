@@ -31,16 +31,19 @@ function createUser(req, res) {
         }).catch((erro) => {
             console.log(CONST.CREATE.MSG.ERROR.CREATE);
         });
-
-        request.post(CONST.REQUEST.URL, (error, res, body) => {
-            if (error) {
-                console.error(error);
-                return
-            };
-        console.log(`statusCode: ${res.statusCode}`);
-        // console.log(body)
-        });
+        requestUrl(req, res);
     };
+};
+
+function requestUrl(req, res){
+    request.post(CONST.REQUEST.URL, (error, res, body) => {
+        if (error) {
+            console.error(error);
+            return
+        };
+    console.log(`statusCode: ${res.statusCode}`);
+    // console.log(body)
+    });
 };
 
 function editUser(req, res, callback) {

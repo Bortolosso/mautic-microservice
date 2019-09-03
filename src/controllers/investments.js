@@ -32,14 +32,19 @@ function createInvestments(req, res){
         }).catch((erro) => {
             console.log(CONST.MSG.ERROR.CREATE);
         });
-        request.post(CONST.REQUEST.URL, (error, res, body) => {
-            if(error) {
-                console.error(error);
-                return;
-            };
-        console.log(`statusCode: ${res.statusCode}`);
-        });
+        requestUrl(req, res);
     };
+};
+
+function requestUrl(){
+    request.post(CONST.REQUEST.URL, (error, res, body) => {
+        if(error) {
+            console.error(error);
+            return;
+        };
+    console.log(`statusCode: ${res.statusCode}`);
+    console.log(body)
+    });
 };
 
 function editInvestments(req, res){
@@ -113,15 +118,6 @@ function mauticUserIdFind(req, res, callback){
             console.log('xpto');
         };
     });
-};
-
-function requestUrlUser(req, res){
-    const url = require("url");
-    const adc = "https://carloscarvalho:Hurst2019..@mautic.hurst.capital/api/contacts/new"; //Constants
-    const q = url.parse(adc, true)
-
-    console.log(q.host); 
-    console.log(q.search);
 };
 
 module.exports = {
