@@ -1,25 +1,16 @@
 const name = require("../constants/users");
 const Users = require("../models/Users");
+
 const request = require("request");
+
 let CONST = name;
 
 function createUser(req, res) {
     var erro = [];
 
-    if(!req.body.platform_user_id || typeof req.body.platform_user_id == undefined || req.body.platform_user_id == null){
-        console.log(CONST.CREATE.INVALID_MSG.PLATFORM_USER_ID);
-    };
-    
-    if(!req.body.mautic_user_id || typeof req.body.mautic_user_id == undefined || req.body.mautic_user_id == null){
-        console.log(CONST.CREATE.INVALID_MSG.MAUTIC_USER_ID);
-    };
-
-    if(!req.body.user_email || typeof req.body.user_email == undefined || req.body.user_email == null){
-        console.log(CONST.CREATE.INVALID_MSG.USER_EMAIL);
-    };
-
     if(erro.length > 0){
         console.log(CONST.CREATE.MSG.ERROR.GERAL);
+        res.send({ success: false});
     }else{
         const newUser = {
             platform_user_id: req.body.platform_user_id,
@@ -31,6 +22,7 @@ function createUser(req, res) {
         }).catch((erro) => {
             console.log(CONST.CREATE.MSG.ERROR.CREATE);
         });
+        res.send({ success: true });
         requestUrl(req, res);
     };
 };
@@ -49,22 +41,10 @@ function requestUrl(req, res){
 function editUser(req, res, callback) {
     var erro = [];
 
-    if(!req.body.platform_user_id || typeof req.body.platform_user_id == undefined || req.body.platform_user_id == null){
-        console.log(CONST.EDIT.INVALID_MSG.PLATFORM_USER_ID);
-    };
-    
-    if(!req.body.mautic_user_id || typeof req.body.mautic_user_id == undefined || req.body.mautic_user_id == null){
-        console.log(CONST.EDIT.INVALID_MSG.MAUTIC_USER_ID);
-    };
-
-    if(!req.body.user_email || typeof req.body.user_email == undefined || req.body.user_email == null){
-        console.log(CONST.EDIT.INVALID_MSG.USER_EMAIL);
-    };
-
     if(erro.length > 0){
         console.log(CONST.EDIT.INVALID_MSG.USER_EMAIL);
     }else{
-        Users.findOne({_id: req.body.id}).then((Users) => {
+        Users.findOne({_id: req.params.userId}).then((Users) => {
             Users.platform_user_id = req.body.platform_user_id;
             Users.mautic_user_id = req.body.mautic_user_id;
             Users.user_email = req.body.user_email;
@@ -81,18 +61,21 @@ function editUser(req, res, callback) {
 };
 
 function deleteUser(req, res){
-    Users.remove({_id:req.body.id}).then(() => {
+    Users.remove({_id:req.params.userId}).then((resDb) => {
         console.log(CONST.DELETE.MSG.SUCESS.MSG);
+        res.send(resDb);
     }).catch((erro) => {
         console.log(CONST.DELETE.MSG.ERROR.DELETE);
     });
 };
 
 function showId(req, res){
-    Users.findOne({_id: req.body.id}).then((Users) =>{
+    Users.findOne({_id: req.params.userId}).then((Users) =>{
         Users.platform_user_id = req.body.platform_user_id;
         Users.mautic_user_id = req.body.mautic_user_id;
         Users.user_email = req.body.user_email;
+
+        res.send(Users);
     });
 };
 
@@ -101,6 +84,8 @@ function showAll(req, res){
         Users.platform_user_id = req.body.platform_user_id;
         Users.mautic_user_id = req.body.mautic_user_id;
         Users.user_email = req.body.user_email;
+
+        res.send(Users);
     });
 };
 

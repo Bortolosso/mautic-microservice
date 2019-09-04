@@ -1,25 +1,14 @@
 const name = require("../constants/segments");
-const users = require("../controllers/users");
 const Segments = require("../models/Segments");
+
 let CONST = name;
 
 function createSegments(req, res){
     var erro = [];
     
-    if(!req.body.mautic_segment_id || typeof req.body.mautic_segment_id == undefined || req.body.mautic_segment_id == null){
-        console.log(CONST.CREATE.INVALID_MSG.MAUTIC_SEGMENT_ID);
-    };
-
-    if(!req.body.platform_equity_id || typeof req.body.platform_equity_id == undefined || req.body.platform_equity_id == null){
-        console.log(CONST.CREATE.INVALID_MSG.PLATFORM_EQUITY_ID);
-    };
-
-    if(!req.body.platform_step_id || typeof req.body.platform_step_id == undefined || req.body.platform_step_id == null){
-        console.log(CONST.CREATE.INVALID_MSG.PLATFORM_STEP_ID);
-    };
-
     if(erro.length > 0){
         console.log(CONST.CREATE.MSG.ERROR.GERAL);
+        res.send({ success: false });
     }else{
         const newSegment = {
             mautic_segment_id: req.body.mautic_segment_id,
@@ -31,34 +20,17 @@ function createSegments(req, res){
         }).catch((erro) => {
             console.log(CONST.CREATE.MSG.SUCESS.MSG);
         });
-
-        segmentIdFind(req, res , (error, result) => {
-            if (error){
-                console.log("xpto");
-            };
-        });
+        res.send({ success: true });
     };
 };
 
 function editSegments(req, res){
     var erro = [];
-    
-    if(!req.body.mautic_segment_id || typeof req.body.mautic_segment_id == undefined || req.body.mautic_segment_id == null){
-        console.log(CONST.EDIT.INVALID_MSG.MAUTIC_SEGMENT_ID);
-    };
-
-    if(!req.body.platform_equity_id || typeof req.body.platform_equity_id == undefined || req.body.platform_equity_id == null){
-        console.log(CONST.EDIT.INVALID_MSG.PLATFORM_EQUITY_ID);
-    };
-
-    if(!req.body.platform_step_id || typeof req.body.platform_step_id == undefined || req.body.platform_step_id == null){
-        console.log(CONST.EDIT.INVALID_MSG.PLATFORM_STEP_ID);
-    };
 
     if(erro.length > 0){
         console.log(CONST.EDIT.MSG.ERROR.GERAL);
     }else{
-        Segments.findOne({_id: req.body.id}).then((Segments) => {
+        Segments.findOne({_id: req.params.segmentId}).then((Segments) => {
             Segments.mautic_segment_id = req.body.mautic_segment_id;
             Segments.platform_equity_id = req.body.platform_equity_id;
             Segments.platform_step_id = req.body.platform_step_id;
@@ -73,20 +45,21 @@ function editSegments(req, res){
     };
 
 function deleteSegments(req, res){
-    Segments.deleteOne({_id:req.body.id}).then(() => {
+    Segments.deleteOne({_id:req.params.segmentId}).then((resDb) => {
          console.log(CONST.DELETE.MSG.SUCESS.MSG);
+         res.send(resDb);
     }).catch((erro) => {
-        console.log(erro);
-        
         console.log(CONST.DELETE.MSG.ERROR.DELETE);        
     });
 };
 
 function showId(req, res){
-    Segments.findOne({_id: req.body.id}).then((Segments) =>{
+    Segments.findOne({_id: req.params.segmentId}).then((Segments) =>{
         Segments.mautic_segment_id = req.body.mautic_segment_id;
         Segments.platform_equity_id = req.body.platform_equity_id;
         Segments.platform_step_id = req.body.platform_step_id;
+
+        res.send(Segments);
     });
 };
 
@@ -95,24 +68,9 @@ function showAll(req, res){
         Segments.mautic_segment_id = req.body.mautic_segment_id;
         Segments.platform_equity_id = req.body.platform_equity_id;
         Segments.platform_step_id = req.body.platform_step_id;
+
+        res.send(Segments);
     });
-};
-
-function segmentIdFind(req, res, callback){
-    req.body.query = {
-        segment_id: req.body.segment_id
-    };
-
-    requestUrlSegment(req, res);
-};
-
-function requestUrlSegment(req, res){
-    const url = require("url");
-    const adc = "https://carloscarvalho:Hurst2019..@mautic.hurst.capital/api/segments/SEGMENT_ID/contact/MAUTIC_USER_ID/add"; //Constants
-    const q = url.parse(adc, true);
-
-    console.log(q.host); 
-    console.log(q.search);
 };
 
 module.exports = {

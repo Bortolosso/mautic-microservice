@@ -9,10 +9,10 @@ router.get("/", controller.showAll);
 
 router.post("/", controller.createSegments);
 
-router.get("/:segmentsId", controller.showId);
+router.get("/:segmentId", controller.showId);
 
-router.put("/:segmentsId", controller.editSegments);
+router.put("/:segmentId", controller.editSegments);
 
-router.delete("/:segmentsId", controller.deleteSegments);
+router.delete("/:segmentId", controller.deleteSegments);
 
 module.exports = router;
