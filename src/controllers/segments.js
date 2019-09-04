@@ -64,7 +64,7 @@ function showId(req, res){
 };
 
 function showAll(req, res){
-    Segments.find({}).then((Segments) =>{
+    Segments.find().then((Segments) =>{
         Segments.mautic_segment_id = req.body.mautic_segment_id;
         Segments.platform_equity_id = req.body.platform_equity_id;
         Segments.platform_step_id = req.body.platform_step_id;

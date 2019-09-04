@@ -1,5 +1,6 @@
 const name = require("../constants/investments");
 const Investments = require("../models/Investments");
+const Users =  require("../models/Users");
 
 const request = require("request");
 
@@ -23,12 +24,20 @@ function createInvestments(req, res){
             console.log(CONST.MSG.ERROR.CREATE);
         });
         res.send({ sucess: true });
-        requestUrl(req, res);
+
+        Users.findOne({ platform_user_id: req.body.platform_user_id }).then((docs) => {
+            console.log(docs);
+//            requestUrl(req.body.segment_id, res);
+        })
     };
 };
 
-function requestUrl(){
-    request.post(CONST.REQUEST.URL, (error, res, body) => {
+function requestUrl(segment_id, res){
+
+    let segment_id = segment_id
+    const url = `https://carloscarvalho:Hurst2019..@mautic.hurst.capital/api/segments/${segment_id}/contact/MAUTIC_USER_ID/add`;
+
+    request.post(url, (error, res, body) => {
         if(error) {
             console.error(error);
             return;
@@ -70,10 +79,6 @@ function deleteInvestments(req, res){
 
 function showId(req, res){
     Investments.findOne({_id: req.params.investmentId}).then((Investments) =>{
-        Investments.platform_user_id = req.body.platform_user_id;
-        Investments.segment_id = req.body.segment_id;
-        Investments.user_segment_added = req.body.user_segment_added;
-
         res.send(Investments);
     });
 };
@@ -86,6 +91,12 @@ function showAll(req, res){
 
         res.send(Investments);
     });
+};
+
+function findSegmentId(req){
+    Users.findOne(req.body.mautic_user_id).then((docs) => {
+        console.log(docs);      
+    })
 };
 
 module.exports = {

@@ -23,22 +23,22 @@ function createUser(req, res) {
             console.log(CONST.CREATE.MSG.ERROR.CREATE);
         });
         res.send({ success: true });
-        requestUrl(req, res);
+        requestUrl();
     };
 };
 
-function requestUrl(req, res){
+function requestUrl(){
     request.post(CONST.REQUEST.URL, (error, res, body) => {
         if (error) {
             console.error(error);
             return
         };
     console.log(`statusCode: ${res.statusCode}`);
-    // console.log(body)
+    console.log(body);
     });
 };
 
-function editUser(req, res, callback) {
+function editUser(req) {
     var erro = [];
 
     if(erro.length > 0){
@@ -80,7 +80,7 @@ function showId(req, res){
 };
 
 function showAll(req, res){
-    Users.find({}).then((Users) =>{
+    Users.find().then((Users) =>{
         Users.platform_user_id = req.body.platform_user_id;
         Users.mautic_user_id = req.body.mautic_user_id;
         Users.user_email = req.body.user_email;
