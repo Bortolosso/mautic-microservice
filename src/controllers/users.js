@@ -23,18 +23,23 @@ function createUser(req, res) {
             console.log(CONST.CREATE.MSG.ERROR.CREATE);
         });
         res.send({ success: true });
-        requestUrl();
+        requestUrl(req.body.mautic_user_id, req.body.user_email);
     };
 };
 
-function requestUrl(){
-    request.post(CONST.REQUEST.URL, (error, res, body) => {
+function requestUrl(user_id, user_email){
+    request.post(`https://carloscarvalho:Hurst2019..@mautic.hurst.capital/api/contacts/new`, {
+        json: {
+            user_id: user_id,
+            user_email: user_email
+        }
+    } ,(error, res, body) => {
         if (error) {
             console.error(error);
             return
         };
     console.log(`statusCode: ${res.statusCode}`);
-    console.log(body);
+    // console.log(body);
     });
 };
 

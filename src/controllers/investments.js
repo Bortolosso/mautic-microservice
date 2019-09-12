@@ -27,15 +27,13 @@ function createInvestments(req, res){
 
         Users.findOne({ platform_user_id: req.body.platform_user_id }).then((docs) => {
             console.log(docs);
-//            requestUrl(req.body.segment_id, res);
+            requestUrl(req.body.segment_id, req.body.platform_user_id);
         })
     };
 };
 
-function requestUrl(segment_id, res){
-
-    let segment_id = segment_id
-    const url = `https://carloscarvalho:Hurst2019..@mautic.hurst.capital/api/segments/${segment_id}/contact/MAUTIC_USER_ID/add`;
+function requestUrl(segment_id, user_id){
+    const url = `https://carloscarvalho:Hurst2019..@mautic.hurst.capital/api/segments/${segment_id}/contact/${user_id}/add`;
 
     request.post(url, (error, res, body) => {
         if(error) {

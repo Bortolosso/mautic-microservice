@@ -1,10 +1,9 @@
 Investments
 
 {
-	"segment_id": "123",
-	"mautic_segment_id": "123",
-	"platform_equity_id": "123",
-	"platform_step_id": "123"
+	"platform_user_id": "79",
+	"segment_id": "45",
+	"user_segment_added": "2019-09-06 00:00:00"
 }
 
 //
@@ -26,3 +25,5 @@ Segments
     "platform_equity_id": "1234",
     "platform_step_id": "1234"
 }
+
+//
