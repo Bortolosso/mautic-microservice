@@ -9,18 +9,19 @@ const router = express.Router();
 const investmentsRoute = require("./src/routes/investments");
 const segmentsRoute = require("./src/routes/segments");
 const usersRoute = require("./src/routes/users");
+const CONST = require("./src/constants/app");
 
 const urlencodedParse = bodyParser.urlencoded({extended:false}); 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost/microservice", {
+mongoose.connect(CONST.APP.MONGODB.URLDATABASE, {
     useNewUrlParser: true
 }).then(() => {
-    console.log("Connected with success !");
+    console.log(CONST.APP.MONGODB.MSG.SUCCESS);
 }).catch((err) => {
-    console.log("There was an error connecting !" + err);
+    console.log(CONST.APP.MONGODB.MSG.ERROR + err);
 });
 
 app.use(express.static(path.join(__dirname, "public")));
@@ -30,7 +31,6 @@ router.use("/investments", investmentsRoute);
 router.use("/segments", segmentsRoute);
 router.use("/users", usersRoute);
 
-const PORT = 8089;
-app.listen(PORT, () => {
-    console.log("Server running in http://localhost:8089");
+app.listen(CONST.APP.SERVER.PORT, () => {
+    console.log(CONST.APP.SERVER.MSG.SUCCESS);
 });

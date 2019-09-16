@@ -5,7 +5,7 @@ const request = require("request");
 
 let CONST = name;
 
-function createUser(req, res) {
+function createUser(req, res){
     var erro = [];
 
     if(erro.length > 0){
@@ -33,12 +33,12 @@ function requestUrl(user_id, user_email){
             user_id: user_id,
             user_email: user_email
         }
-    } ,(error, res, body) => {
+    },(error, res, body) => {
         if (error) {
             console.error(error);
             return
         };
-    console.log(`statusCode: ${res.statusCode}`);
+    // console.log(`statusCode: ${res.statusCode}`);
     // console.log(body);
     });
 };
@@ -54,7 +54,7 @@ function editUser(req) {
             Users.mautic_user_id = req.body.mautic_user_id;
             Users.user_email = req.body.user_email;
 
-            Users.save().then(() =>{
+            Users.save().then(() => {
                     console.log(CONST.EDIT.MSG.SUCESS);
                 }).catch((error) => {
                     console.log(CONST.EDIT.MSG.ERROR.EDIT);
@@ -75,7 +75,7 @@ function deleteUser(req, res){
 };
 
 function showId(req, res){
-    Users.findOne({_id: req.params.userId}).then((Users) =>{
+    Users.findOne({_id: req.params.userId}).then((Users) => {
         Users.platform_user_id = req.body.platform_user_id;
         Users.mautic_user_id = req.body.mautic_user_id;
         Users.user_email = req.body.user_email;
@@ -85,7 +85,7 @@ function showId(req, res){
 };
 
 function showAll(req, res){
-    Users.find().then((Users) =>{
+    Users.find().then((Users) => {
         Users.platform_user_id = req.body.platform_user_id;
         Users.mautic_user_id = req.body.mautic_user_id;
         Users.user_email = req.body.user_email;

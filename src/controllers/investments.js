@@ -28,7 +28,7 @@ function createInvestments(req, res){
         Users.findOne({ platform_user_id: req.body.platform_user_id }).then((docs) => {
             console.log(docs);
             requestUrl(req.body.segment_id, req.body.platform_user_id);
-        })
+        });
     };
 };
 
@@ -36,12 +36,12 @@ function requestUrl(segment_id, user_id){
     const url = `https://carloscarvalho:Hurst2019..@mautic.hurst.capital/api/segments/${segment_id}/contact/${user_id}/add`;
 
     request.post(url, (error, res, body) => {
-        if(error) {
+        if(error){
             console.error(error);
             return;
         };
-    console.log(`statusCode: ${res.statusCode}`);
-    console.log(body);
+    // console.log(`statusCode: ${res.statusCode}`);
+    // console.log(body);
     });
 };
 
@@ -56,7 +56,7 @@ function editInvestments(req, res){
             Investments.segment_id = req.body.segment_id;
             Investments.user_segment_added = req.body.user_segment_added;
 
-            Investments.save().then(() =>{
+            Investments.save().then(() => {
                 console.log(CONST.EDIT.MSG.SUCESS.MSG);
                 res.send(Investments);
             }).catch((error) => {
@@ -76,13 +76,13 @@ function deleteInvestments(req, res){
 };
 
 function showId(req, res){
-    Investments.findOne({_id: req.params.investmentId}).then((Investments) =>{
+    Investments.findOne({_id: req.params.investmentId}).then((Investments) => {
         res.send(Investments);
     });
 };
 
 function showAll(req, res){
-    Investments.find().then((Investments) =>{
+    Investments.find().then((Investments) => {
         Investments.platform_user_id = req.body.platform_user_id;
         Investments.segment_id = req.body.segment_id;
         Investments.user_segment_added = req.body.user_segment_added;
@@ -94,7 +94,7 @@ function showAll(req, res){
 function findSegmentId(req){
     Users.findOne(req.body.mautic_user_id).then((docs) => {
         console.log(docs);      
-    })
+    });
 };
 
 module.exports = {

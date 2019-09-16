@@ -35,7 +35,7 @@ function editSegments(req, res){
             Segments.platform_equity_id = req.body.platform_equity_id;
             Segments.platform_step_id = req.body.platform_step_id;
 
-            Segments.save().then(() =>{
+            Segments.save().then(() => {
                     console.log(CONST.EDIT.MSG.SUCESS.MSG);
                 }).catch((error) => {
                     console.log(CONST.EDIT.MSG.ERROR.EDIT, erro);
@@ -54,7 +54,7 @@ function deleteSegments(req, res){
 };
 
 function showId(req, res){
-    Segments.findOne({_id: req.params.segmentId}).then((Segments) =>{
+    Segments.findOne({_id: req.params.segmentId}).then((Segments) => {
         Segments.mautic_segment_id = req.body.mautic_segment_id;
         Segments.platform_equity_id = req.body.platform_equity_id;
         Segments.platform_step_id = req.body.platform_step_id;
@@ -64,7 +64,7 @@ function showId(req, res){
 };
 
 function showAll(req, res){
-    Segments.find().then((Segments) =>{
+    Segments.find().then((Segments) => {
         Segments.mautic_segment_id = req.body.mautic_segment_id;
         Segments.platform_equity_id = req.body.platform_equity_id;
         Segments.platform_step_id = req.body.platform_step_id;
